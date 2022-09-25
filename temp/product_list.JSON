@@ -1,0 +1,68 @@
+[
+    {
+        "name":"camera A",
+        "price":1400,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622511/redux-cart/paul-gaudriault-cwy9yVBBPxg-unsplash_nsalul.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera B",
+        "price":1450,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622498/redux-cart/andrew-draper-lFnMKEZT4zk-unsplash_wbqark.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera C",
+        "price":1600,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622433/redux-cart/julius-drost-dS-q7-zkD9c-unsplash_lua1oj.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera D",
+        "price":1500,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622428/redux-cart/theregisti-HSXIp58yPyI-unsplash_qqcd87.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera E",
+        "price":2000,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622427/redux-cart/jakob-owens-esbfaHABh7Y-unsplash_zmddie.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera F",
+        "price":1800,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622427/redux-cart/nordwood-themes-F3Dde_9thd8-unsplash_cnigmw.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera G",
+        "price":1450,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622426/redux-cart/alexander-andrews-soLEw77Napo-unsplash_xnglgt.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera H",
+        "price":1500,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622426/redux-cart/ethan-hoover-vasU4-TlC5I-unsplash_h1rgvd.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera I",
+        "price":1650,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622426/redux-cart/william-thomas-ny6tO4ItOEY-unsplash_umhzhb.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera J",
+        "price":1800,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622425/redux-cart/graham-mansfield-wp9ggFHgsAI-unsplash_mhbitt.jpg",
+        "tags":[]
+    },
+    {
+        "name":"camera K",
+        "price":1200,
+        "image":"https://res.cloudinary.com/cinecus/image/upload/v1647622424/redux-cart/olena-sergienko-9-uSCnBaVGU-unsplash_xonf4s.jpg",
+        "tags":[]
+    }
+]
