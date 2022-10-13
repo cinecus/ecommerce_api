@@ -1,4 +1,4 @@
-import { Body, Controller, Post, HttpStatus, HttpCode, Res, Get, UseGuards, Req } from '@nestjs/common';
+import { Body, Controller, Post, HttpStatus, HttpCode, Res, Get, UseGuards, Req, Inject } from '@nestjs/common';
 import { ResponseService } from 'src/response/response.service';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
@@ -82,7 +82,6 @@ export class AuthController {
             const user = (await this.authService.findUserByID(userID)).toObject()
 
             delete user.password
-
             return this.response.success('ดึงข้อมูลผู้ใช้สำเร็จ', user)
         } catch (error) {
             return this.response.failed(error)

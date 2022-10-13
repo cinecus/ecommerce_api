@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -20,6 +20,9 @@ import { AuthService } from './auth/auth.service';
 import { StockModule } from './stock/stock.module';
 import { SendgridService } from './sendgrid/sendgrid.service';
 import { SendgridModule } from './sendgrid/sendgrid.module';
+import { WinstonModule } from 'nest-winston';
+import * as winston from 'winston';
+import { LoggerMiddleware } from './utils/logger.middleware';
 
 @Module({
   imports: [
@@ -33,6 +36,9 @@ import { SendgridModule } from './sendgrid/sendgrid.module';
         uri: config.get<string>('DATABASE_URL'), // Loaded from .ENV
       })
     }),
+    WinstonModule.forRoot({
+      // options
+    }),
     AuthModule,
     ResponseModule,
     ProductModule,
@@ -43,4 +49,8 @@ import { SendgridModule } from './sendgrid/sendgrid.module';
   controllers: [AppController],
   providers: [AppService, ResponseService, SendgridService],
 })
-export class AppModule { }
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+      consumer.apply(LoggerMiddleware).forRoutes('*')
+  }
+ }
