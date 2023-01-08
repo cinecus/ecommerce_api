@@ -11,13 +11,13 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
         super({
             clientID: config.get('FACEBOOK_APP_ID'),
             clientSecret: config.get('FACEBOOK_APP_SECRET'),
-            callbackURL: 'http://localhost:5000/auth/facebook/callback',
+            callbackURL: `${config.get('API_URL')}/auth/facebook/callback`,
             profileFields: ['id', 'email', 'displayName', 'name'],
         })
     }
 
     async validate(accessToken: string, refreshToken: string, profile: any, done: VerifyCallback): Promise<any> {
-        const { id, name,provider} = profile
+        const { id, name, provider } = profile
         const user = {
             id,
             firstName: name.givenName,
@@ -25,6 +25,6 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
             provider
         }
 
-        done(null,user)
+        done(null, user)
     }
 }
