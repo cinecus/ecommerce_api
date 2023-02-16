@@ -8,14 +8,15 @@ import * as morgan from 'morgan'
 import * as path from 'path'
 import * as rfs from 'rotating-file-stream'
 import * as dfns from 'date-fns'
+import * as session from 'express-session';
 
 function logFilename() {
   return `${dfns.format(new Date(), 'yyyy-MM-dd')}-access.log`;
 }
 
-const logStream = rfs.createStream(logFilename,{
-  interval:'1d',
-  path: path.join(__dirname,'..', 'log')
+const logStream = rfs.createStream(logFilename, {
+  interval: '1d',
+  path: path.join(__dirname, '..', 'log')
 })
 
 async function bootstrap() {
@@ -23,8 +24,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.enableCors({
-    credentials:true,
-    origin:process.env.FRONTEND_URI
+    credentials: true,
+    origin: process.env.FRONTEND_URI
   });
   app.useGlobalFilters(new HttpExceptionFilter())
   app.use(cookieParser())
@@ -38,7 +39,7 @@ async function bootstrap() {
       }
     }
   ))
-  app.use(morgan((tokens,req,res)=>{
+  app.use(morgan((tokens, req, res) => {
     delete req.body.password
     return [
       tokens.method(req, res),
@@ -51,8 +52,14 @@ async function bootstrap() {
       JSON.stringify(req.cookies),
       JSON.stringify(req.body),
     ].join(' ')
-  },{stream:logStream}))
-
+  }, { stream: logStream }))
+  app.use(
+    session({
+      secret: 'my-secret',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
   await app.listen(port, () => {
     let logger = new Logger('START');
     logger.debug(`server is listening on port ${port}`)

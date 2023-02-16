@@ -31,6 +31,9 @@ export class Auth {
     githubID:string;
 
     @Prop()
+    lineID:string;
+
+    @Prop()
     provider:string;
 
     @Prop({default:0})

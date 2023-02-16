@@ -232,4 +232,47 @@ export class AuthService {
         }
 
     }
+
+    async lineAuthenticate(req: AppRequest, res: Response) {
+        const { id, firstName, lastName, provider } = req.user
+        try {
+            //ตรวจสอบว่า user นั้นเคยลงทะเบียนแล้วหรือยัง?
+            const user = await this.authModel.findOne({ lineID: id })
+
+            let token: string
+
+            if (!user) {
+                //new User
+                const newUser = await this.authModel.create({
+                    firstName,
+                    lastName,
+                    provider,
+                    lineID: id,
+                })
+
+                await newUser.save()
+                // Create token
+                token = (await this.signToken(newUser.id, newUser.tokenVersion)).accessToken
+
+                // Send token to frontend
+                this.sendToken(res, token)
+
+                res.redirect(`${this.config.get('FRONTEND_URI')}`)
+            } else {
+                //Old User
+
+                // Create token
+                token = (await this.signToken(user.id, user.tokenVersion)).accessToken
+
+                // Send token to frontend
+                this.sendToken(res, token)
+
+                res.redirect(`${this.config.get('FRONTEND_URI')}`)
+            }
+
+        } catch (error) {
+            res.redirect(`${this.config.get('FRONTEND_URI')}`!)
+        }
+
+    }
 }

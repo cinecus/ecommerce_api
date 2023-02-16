@@ -4,7 +4,7 @@ import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto';
 import * as bcrypt from 'bcryptjs'
-import { FacebookGuard, GithubGuard, GoogleGuard, JwtGuard } from './guard';
+import { FacebookGuard, GithubGuard, GoogleGuard, JwtGuard, LineGuard } from './guard';
 import { GetUser } from './decorator';
 import { randomBytes } from 'crypto';
 
@@ -213,5 +213,19 @@ export class AuthController {
     @Get('github/callback')
     async githubAuthRedirect(@Req() req, @Res() res) {
         this.authService.githubAuthenticate(req, res)
+    }
+
+    @UseGuards(LineGuard)
+    @HttpCode(HttpStatus.OK)
+    @Get('line')
+    async lineAuth() {
+
+    }
+
+    @UseGuards(LineGuard)
+    @HttpCode(HttpStatus.OK)
+    @Get('line/callback')
+    async lineAuthRedirect(@Req() req, @Res() res) {
+        this.authService.lineAuthenticate(req, res)
     }
 }
